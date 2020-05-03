@@ -39,12 +39,12 @@ public class EvaluateServiceImpl implements EvaluateService {
     /**
      * 根据主键查询操作
      *
-     * @param id
+     * @param waybillNo
      * @return
      */
     @Override
-    public Evaluate selectByPrimaryKey(int id) {
-        return evaluateMapper.selectByPrimaryKey(id);
+    public Evaluate selectByPrimaryKey(String waybillNo) {
+        return evaluateMapper.selectByPrimaryKey(waybillNo);
     }
 
     /**
@@ -68,12 +68,13 @@ public class EvaluateServiceImpl implements EvaluateService {
         return evaluateMapper.updateByPrimaryKey(evaluate);
     }
 
-    /**
-     * 查询所有数据
-     * @return
-     */
     @Override
-    public int count() {
-        return evaluateMapper.count();
+    public int count(String waybillNo) {
+        return evaluateMapper.count(waybillNo);
+    }
+
+    @Override
+    public List<Evaluate> selectPage(String waybillNo) {
+        return evaluateMapper.selectPage(waybillNo);
     }
 }

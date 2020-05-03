@@ -1,6 +1,7 @@
 package com.gzj.express_transportation.dao;
 
 import com.gzj.express_transportation.entity.PersonnelInfo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -46,9 +47,13 @@ public interface PersonnelInfoMapper {
      */
     int updateByPrimaryKey(PersonnelInfo personnelInfo);
 
-    /**
-     * 查询所有数据
-     * @return
-     */
-    int count();
+
+    int count(@Param("phone") String phone, @Param("name") String name, @Param("sex") String sex,@Param("role") String role);
+
+
+    List<PersonnelInfo> selectPage(@Param("phone") String phone, @Param("name") String name, @Param("sex") String sex,@Param("role") String role);
+
+    PersonnelInfo doLogin(@Param("phone") String phone,@Param("password") String password);
+
+
 }

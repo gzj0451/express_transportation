@@ -1,6 +1,7 @@
 package com.gzj.express_transportation.service;
 
 import com.gzj.express_transportation.entity.PersonnelInfo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -45,9 +46,9 @@ public interface PersonnelInfoService {
      */
     int updateByPrimaryKey(PersonnelInfo personnelInfo);
 
-    /**
-     * 查询所有数据
-     * @return
-     */
-    int count();
+    int count(String phone,String name, String sex,String role);
+
+    PersonnelInfo doLogin(String phone,String password);
+    List<PersonnelInfo> selectPage(String phone, String name, String sex, String role);
+
 }

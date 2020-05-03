@@ -1,6 +1,7 @@
 package com.gzj.express_transportation.service.impl;
 
 import com.gzj.express_transportation.dao.PositionsMapper;
+import com.gzj.express_transportation.entity.Evaluate;
 import com.gzj.express_transportation.entity.Positions;
 import com.gzj.express_transportation.service.PositionsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,12 +69,13 @@ public class PositionsServiceImpl implements PositionsService {
         return positionsMapper.updateByPrimaryKey(positions);
     }
 
-    /**
-     * 查询所有数据
-     * @return
-     */
     @Override
-    public int count() {
-        return positionsMapper.count();
+    public int count(String waybillNo) {
+        return positionsMapper.count(waybillNo);
+    }
+
+    @Override
+    public List<Positions> selectPage(String waybillNo) {
+        return positionsMapper.selectPage(waybillNo);
     }
 }

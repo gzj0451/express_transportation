@@ -49,13 +49,13 @@ public class EvaluateController {
     /**
      * 根据主键查找对象  最多只能返回一个对象
      *
-     * @param id
+     * @param
      * @return
      */
     @GetMapping("/selectByPrimaryKey")
-    public Result selectByPrimaryKey(int id) {
+    public Result selectByPrimaryKey(String waybillNo) {
         try {
-            Evaluate evaluate1 = evaluateService.selectByPrimaryKey(id);
+            Evaluate evaluate1 = evaluateService.selectByPrimaryKey(waybillNo);
             if (evaluate1 == null) {
                 return new Result().successMessage("无数据");
             } else {
@@ -106,14 +106,14 @@ public class EvaluateController {
      * @return
      */
     @GetMapping("/selectPage")
-    public Result selectPage(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int limit) {
+    public Result selectPage(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int limit,String waybillNo) {
         try {
             PageHelper.startPage(page, limit);
-            List<Evaluate> list = evaluateService.selectAll();
+            List<Evaluate> list = evaluateService.selectPage(waybillNo);
             if (list == null) {
                 return new Result().successMessage("无数据");
             } else {
-                return new Result(0, "ok", list, evaluateService.count());
+                return new Result(0, "ok", list, evaluateService.count(waybillNo));
             }
         } catch (Exception ex) {
             return new Result().error(ex.getMessage());

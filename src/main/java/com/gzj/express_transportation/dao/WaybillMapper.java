@@ -1,6 +1,10 @@
 package com.gzj.express_transportation.dao;
 
+import com.gzj.express_transportation.controller.WaybillController;
+import com.gzj.express_transportation.entity.Orders;
+import com.gzj.express_transportation.entity.PersonnelInfo;
 import com.gzj.express_transportation.entity.Waybill;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -46,9 +50,11 @@ public interface WaybillMapper {
      */
     int updateByPrimaryKey(Waybill waybill);
 
-    /**
-     * 查询所有数据
-     * @return
-     */
-    int count();
+
+    int count(@Param("waybillNo") String waybillNo, @Param("wStatus") String wStatus, @Param("role") String role, @Param("phone") String phone);
+
+    List<Waybill> selectPage(@Param("waybillNo") String waybillNo, @Param("wStatus") String wStatus, @Param("role") String role, @Param("phone") String phone);
+
+    Orders getCount();
+
 }

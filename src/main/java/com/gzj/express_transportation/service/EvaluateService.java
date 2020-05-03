@@ -1,6 +1,7 @@
 package com.gzj.express_transportation.service;
 
 import com.gzj.express_transportation.entity.Evaluate;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -25,10 +26,10 @@ public interface EvaluateService {
     /**
      * 根据主键查询操作
      *
-     * @param id
+     * @param
      * @return
      */
-    Evaluate selectByPrimaryKey(int id);
+    Evaluate selectByPrimaryKey(String waybillNo);
 
     /**
      * 全部查询操作
@@ -45,9 +46,9 @@ public interface EvaluateService {
      */
     int updateByPrimaryKey(Evaluate evaluate);
 
-    /**
-     * 查询所有数据
-     * @return
-     */
-    int count();
+
+    int count(String waybillNo);
+
+    List<Evaluate> selectPage(String waybillNo);
+
 }

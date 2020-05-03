@@ -1,5 +1,6 @@
 package com.gzj.express_transportation.service;
 
+import com.gzj.express_transportation.entity.Evaluate;
 import com.gzj.express_transportation.entity.Positions;
 
 import java.util.List;
@@ -45,9 +46,7 @@ public interface PositionsService {
      */
     int updateByPrimaryKey(Positions positions);
 
-    /**
-     * 查询所有数据
-     * @return
-     */
-    int count();
+    int count(String waybillNo);
+
+    List<Positions> selectPage(String waybillNo);
 }

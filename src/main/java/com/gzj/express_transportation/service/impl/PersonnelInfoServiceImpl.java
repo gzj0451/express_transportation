@@ -3,6 +3,7 @@ package com.gzj.express_transportation.service.impl;
 import com.gzj.express_transportation.dao.PersonnelInfoMapper;
 import com.gzj.express_transportation.entity.PersonnelInfo;
 import com.gzj.express_transportation.service.PersonnelInfoService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -73,7 +74,17 @@ public class PersonnelInfoServiceImpl implements PersonnelInfoService {
      * @return
      */
     @Override
-    public int count() {
-        return personnelInfoMapper.count();
+    public int count( String phone, String name,  String sex, String role) {
+        return personnelInfoMapper.count(phone,name,sex,role);
+    }
+    @Override
+    public List<PersonnelInfo> selectPage(String phone,String name,String sex,String role) {
+        return personnelInfoMapper.selectPage(phone,name,sex,role);
+
+    }
+    @Override
+    public PersonnelInfo doLogin(String phone,String password) {
+        return personnelInfoMapper.doLogin(phone,password);
+
     }
 }

@@ -23,7 +23,6 @@ public class PersonnelInfoController {
     @GetMapping("/deleteByPrimaryKey")
     public Result deleteByPrimaryKey(int id) {
         try {
-
             return personnelInfoService.deleteByPrimaryKey(id) > 0 ? new Result().successMessage("删除成功") : Result.error("删除失败");
         } catch (Exception ex) {
             return new Result().error(ex.getMessage());
@@ -106,14 +105,28 @@ public class PersonnelInfoController {
      * @return
      */
     @GetMapping("/selectPage")
-    public Result selectPage(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int limit) {
+    public Result selectPage(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int limit,String phone,String name,String sex,String role) {
         try {
             PageHelper.startPage(page, limit);
-            List<PersonnelInfo> list = personnelInfoService.selectAll();
+            List<PersonnelInfo> list = personnelInfoService.selectPage(phone,name,sex,role);
             if (list == null) {
                 return new Result().successMessage("无数据");
             } else {
-                return new Result(0, "ok", list, personnelInfoService.count());
+                return new Result(0, "ok", list, personnelInfoService.count(phone,name,sex,role));
+            }
+        } catch (Exception ex) {
+            return new Result().error(ex.getMessage());
+        }
+    }
+
+    @GetMapping("/doLogin")
+    public Result doLogin(String phone, String password) {
+        try {
+            PersonnelInfo list = personnelInfoService.doLogin(phone,password);
+            if (list == null) {
+                return new Result().error(201,"账号密码有误！");
+            } else {
+                return new Result().success(list);
             }
         } catch (Exception ex) {
             return new Result().error(ex.getMessage());

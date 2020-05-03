@@ -106,14 +106,14 @@ public class PositionsController {
      * @return
      */
     @GetMapping("/selectPage")
-    public Result selectPage(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int limit) {
+    public Result selectPage(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int limit,String waybillNo) {
         try {
             PageHelper.startPage(page, limit);
-            List<Positions> list = positionsService.selectAll();
+            List<Positions> list = positionsService.selectPage(waybillNo);
             if (list == null) {
                 return new Result().successMessage("无数据");
             } else {
-                return new Result(0, "ok", list, positionsService.count());
+                return new Result(0, "ok", list, positionsService.count(waybillNo));
             }
         } catch (Exception ex) {
             return new Result().error(ex.getMessage());

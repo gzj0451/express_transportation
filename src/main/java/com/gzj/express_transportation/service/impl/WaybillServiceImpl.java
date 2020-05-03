@@ -68,12 +68,13 @@ public class WaybillServiceImpl implements WaybillService {
         return waybillMapper.updateByPrimaryKey(waybill);
     }
 
-    /**
-     * 查询所有数据
-     * @return
-     */
     @Override
-    public int count() {
-        return waybillMapper.count();
+    public int count(String waybillNo, String wStatus, String role, String pid) {
+        return waybillMapper.count(waybillNo,wStatus,role,pid);
+    }
+
+    @Override
+    public  List<Waybill>  selectPage(String waybillNo, String wStatus, String role, String phone) {
+        return waybillMapper.selectPage(waybillNo,wStatus,role,phone);
     }
 }

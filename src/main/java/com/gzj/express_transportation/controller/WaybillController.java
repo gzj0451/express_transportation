@@ -1,4 +1,6 @@
 package com.gzj.express_transportation.controller;
+import com.gzj.express_transportation.dao.WaybillMapper;
+import com.gzj.express_transportation.entity.Orders;
 import com.gzj.express_transportation.entity.Waybill;
 import com.gzj.express_transportation.service.WaybillService;
 import com.gzj.express_transportation.util.Result;
@@ -12,6 +14,8 @@ import com.github.pagehelper.PageHelper;
 public class WaybillController {
     @Autowired
     private WaybillService waybillService;
+    @Autowired
+    private WaybillMapper waybillMapper;
 
     /**
      * 根据主键删除
@@ -99,22 +103,35 @@ public class WaybillController {
             return new Result().error(ex.getMessage());
         }
     }
-    
-    
+
      /* 查询所有数据分页
      *
      * @return
      */
     @GetMapping("/selectPage")
-    public Result selectPage(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int limit) {
+    public Result selectPage(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int limit,String waybillNo, String wStatus, String role, String phone) {
         try {
             PageHelper.startPage(page, limit);
-            List<Waybill> list = waybillService.selectAll();
+            List<Waybill> list = waybillService.selectPage(waybillNo,wStatus,role,phone);
             if (list == null) {
                 return new Result().successMessage("无数据");
             } else {
-                return new Result(0, "ok", list, waybillService.count());
+                return new Result(0, "ok", list, waybillService.count(waybillNo,wStatus,role,phone));
             }
+        } catch (Exception ex) {
+            return new Result().error(ex.getMessage());
+        }
+    }
+    /* 查询所有数据分页
+     *
+     * @return
+     */
+    @GetMapping("/getCount")
+    public Result getCount() {
+        try {
+
+            Orders orders = waybillMapper.getCount();
+             return new Result(0, "ok", orders, 0);
         } catch (Exception ex) {
             return new Result().error(ex.getMessage());
         }

@@ -1,6 +1,8 @@
 package com.gzj.express_transportation.dao;
 
+import com.gzj.express_transportation.entity.Evaluate;
 import com.gzj.express_transportation.entity.Positions;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -46,9 +48,9 @@ public interface PositionsMapper {
      */
     int updateByPrimaryKey(Positions positions);
 
-    /**
-     * 查询所有数据
-     * @return
-     */
-    int count();
+
+    int count(@Param("waybillNo") String waybillNo);
+
+    List<Positions> selectPage(@Param("waybillNo") String waybillNo);
+    Positions doLogin(@Param("phone") String phone,@Param("password") String password);
 }

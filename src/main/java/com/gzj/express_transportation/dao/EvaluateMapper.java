@@ -1,6 +1,8 @@
 package com.gzj.express_transportation.dao;
 
 import com.gzj.express_transportation.entity.Evaluate;
+import com.gzj.express_transportation.entity.Waybill;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -26,10 +28,10 @@ public interface EvaluateMapper {
     /**
      * 根据主键查询操作
      *
-     * @param id
+     * @param waybillNo
      * @return
      */
-    Evaluate selectByPrimaryKey(int id);
+    Evaluate selectByPrimaryKey(String waybillNo);
 
     /**
      * 全部查询操作
@@ -46,9 +48,7 @@ public interface EvaluateMapper {
      */
     int updateByPrimaryKey(Evaluate evaluate);
 
-    /**
-     * 查询所有数据
-     * @return
-     */
-    int count();
+    int count(@Param("waybillNo") String waybillNo);
+
+    List<Evaluate> selectPage(@Param("waybillNo") String waybillNo);
 }

@@ -45,9 +45,7 @@ public interface WaybillService {
      */
     int updateByPrimaryKey(Waybill waybill);
 
-    /**
-     * 查询所有数据
-     * @return
-     */
-    int count();
+
+    int count(String waybillNo, String wStatus, String role, String phone);
+    List<Waybill> selectPage(String waybillNo, String wStatus, String role, String phone);
 }
